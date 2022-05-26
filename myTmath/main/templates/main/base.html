@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!----========== Favicon ========== -->
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'images/emath.png' %}">
+
+    <!----========== Boxicons CSS ========== -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+
+
+    <!----========== Script ========== -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+ 
+  
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body id="body">
+
+    <!----========== NAVBAR ==========---->
+    <nav class="sidebar close" id="nav">
+        <header>
+            <a href="{% url 'home' %}">
+                <div class="image-text">
+                    {% load static %}
+                    <img class="m-2 mb-0 h-8 w-8" src="{% static 'images/emath.png' %}" alt="">
+                    <div class="text logo-text">
+                        <span class="name">Emath</span>
+                        <span class="profession">Learn for Future</span>
+                    </div>
+                </div>
+            </a>
+            
+
+            <i class='bx bx-chevron-right toggle bx-xs mt-1'></i>
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+
+                <li class="search-box">
+                    <i class='bx bx-search icon'></i>
+                    <input type="text" placeholder="Search...">
+                </li>
+
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="{% url 'home' %}">
+                            <i class='bx bx-home-alt icon' ></i>
+                            <span class="text nav-text">Home</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="{% url 'problems' %}">
+                            <i class='bx bx-task icon'></i>
+                            <span class="text nav-text">Problems</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="{% url 'submissions' %}">
+                            <i class='bx bx-book-content icon'></i>
+                            <span class="text nav-text">Submissions</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="{% url 'contest' %}">
+                            <i class='bx bx-bar-chart-alt-2 icon'></i>
+                            <span class="text nav-text">Contest</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+
+            <div class="bottom-content">
+                <li class="">
+                    <a href="{% url 'login' %}">
+                        <i class='bx bx-user-circle icon bx-sm'></i>
+                        <span class="text nav-text">Account</span>
+                    </a>
+                </li>
+
+                <li class="mode">
+                    <div class="sun-moon">
+                        <i class='bx bx-moon icon moon'></i>
+                        <i class='bx bx-sun icon sun'></i>
+                    </div>
+                    <span class="mode-text text">Dark mode</span>
+
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+                
+            </div>
+        </div>
+
+    </nav>
+
+    <div class="home_container p-2 pr-4 pl-0 ml-20 mr-20 sm:p-8 pt-6">
+
+        <!----========== HEADER ==========---->
+        <div class="header flex">
+            <div class="block ml-4 -mt-2 sm:ml-0 sm:mt-0">
+                <div class="text-2xl font-semibold">{% block headertitle %}{% endblock %}!✋🏻</div>
+                <div class="text-sm text-gray-400 font-medium lg:text-base">Let's learn something new today!</div>
+            </div>
+    
+            <div class="header_bar ml-auto hidden mt-2 md:flex md:block">
+                <div class="search_bar h-10 ml-auto w-96 bg-white flex items-center rounded-lg text-gray-400">
+                    <i class='bx bx-search icon bx-sm m-2'></i>
+                    <input class="w-80 text-sm outline-none font-medium" type="text" placeholder="Search something here...">
+                </div>
+            
+                <div class="notification_box ml-2 text-gray-400 h-10 w-10 bg-white rounded-lg flex justify-center items-center">
+                    <i class='bx bx-bell bx-sm'></i>
+                </div>
+            </div>
+        </div>
+
+
+        <!----========== HOME ==========---->
+        {% block home_container %}
+        {% endblock %}
+
+        <!----========== PROBLEMS ==========---->
+        {% block problems_container %}
+        {% endblock %}
+
+        <!----========== SUBMISSIONS ==========---->
+        {% block submissions_container %}
+        {% endblock %}
+
+        <!----========== SUBMISSIONS ==========---->
+        {% block contest_container %}
+        {% endblock %}
+
+        <!----========== CLASS LIST ==========---->
+        {% block class_list %}
+        {% endblock %}
+
+
+    </div> 
+
+    {% if request.user.is_authenticated %}
+    <script>
+        console.log('Sign in')
+    </script>
+    {% else %}
+    <script>
+        console.log('Sign out')
+    </script>
+    {% endif %}
+
+    <div class="rightbar__container hidden lg:block">
+
+        <!----========== LOGIN ==========---->
+        <div class="login__container h-auto w-full rounded-xl p-4 ">
+            <div class="user_profile flex">
+                {% load static %}
+                <img class="h-12 w-12 mr-4 rounded-full" src="{% static 'images/user.png' %}" alt="">
+                <div class="">
+                    <div class="text-base font-semibold">Welcome!✋🏻</div>
+                    <div class="text-xs font-medium text-gray-400">Let's learn something new today</div>
+                </div>
+            </div>
+            <div class="user_login_register grid grid-cols-2 gap-2 mt-4">
+                <a href="{% url 'login' %}">
+                    <div class="login_btn text-center text-sm p-2 rounded-lg cursor-pointer">Login</div>
+                </a>
+                
+                <div class="register_btn text-center text-sm p-2 rounded-lg cursor-pointer">Register</div>
+            </div>
+        </div>
+        
+        <!----========== NOTIFICATION ==========---->
+        {% block notification %}
+        <div class="notification_container">
+            <div class="flex mt-6 mb-3">
+                <div class="font-semibold flex items-center">
+                    <i class='bx bxs-bell-ring text-yellow-400 mr-1'></i>
+                    Notifications
+                </div>
+                <div class="text-gray-400 ml-auto cursor-pointer font-medium text-sm">See all</div>
+            </div>
+
+            <div class="notifications__container rounded-xl p-4 pl-4 pr-2 pb-12">
+                <div class="notifications__title flex">
+                    <div class="text-base font-semibold">Online classes for newbie</div>
+                </div>
+
+                <div class="classroom_list h-full overflow-auto pr-2">
+
+                    <div class="classroom">
+                        <hr class="mt-3 mb-2">
+                        <div class="class_name text-sm font-semibold flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                                <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                            </svg>
+                            Class A1 (Coding)
+                        </div>
+                        <div class="class_time text-xs font-medium text-gray-400 mt-1">
+                            Time: 19h30, Wenesday and Friday.
+                        </div>
+                        <div class="class_teacher text-xs font-medium text-gray-400 mt-1">
+                            Teacher: Nguyen Duc Toan
+                        </div>
+                        <div class="class_teacher text-xs font-medium text-gray-400 mt-1">
+                            Tutors: Ho Thi Hien
+                        </div>
+                        <div class="user_login_register grid grid-cols-2 gap-2 mt-2">
+                            <a href="#">
+                                <div class="login_btn text-center text-sm p-2 rounded-lg cursor-pointer">Join class</div>
+                            </a>
+                            
+                            <a href="#">
+                                <div class="login_btn text-center text-sm p-2 rounded-lg cursor-pointer">Register</div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="classroom">
+                        <hr class="mt-3 mb-2">
+                        <div class="class_name text-sm font-semibold flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                                <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                            </svg>
+                            Class A1 (Coding)
+                        </div>
+                        <div class="class_time text-xs font-medium text-gray-400 mt-1">
+                            Time: 19h30, Wenesday and Friday.
+                        </div>
+                        <div class="class_teacher text-xs font-medium text-gray-400 mt-1">
+                            Teacher: Nguyen Duc Toan
+                        </div>
+                        <div class="class_teacher text-xs font-medium text-gray-400 mt-1">
+                            Tutors: Ho Thi Hien
+                        </div>
+                        <div class="user_login_register grid grid-cols-2 gap-2 mt-2">
+                            <a href="#">
+                                <div class="login_btn text-center text-sm p-2 rounded-lg cursor-pointer">Join class</div>
+                            </a>
+                            
+                            <a href="#">
+                                <div class="login_btn text-center text-sm p-2 rounded-lg cursor-pointer">Register</div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="classroom">
+                        <hr class="mt-3 mb-2">
+                        <div class="class_name text-sm font-semibold flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                                <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                            </svg>
+                            Class A1 (Coding)
+                        </div>
+                        <div class="class_time text-xs font-medium text-gray-400 mt-1">
+                            Time: 19h30, Wenesday and Friday.
+                        </div>
+                        <div class="class_teacher text-xs font-medium text-gray-400 mt-1">
+                            Teacher: Nguyen Duc Toan
+                        </div>
+                        <div class="class_teacher text-xs font-medium text-gray-400 mt-1">
+                            Tutors: Ho Thi Hien
+                        </div>
+                        <div class="user_login_register grid grid-cols-2 gap-2 mt-2">
+                            <a href="#">
+                                <div class="login_btn text-center text-sm p-2 rounded-lg cursor-pointer">Join class</div>
+                            </a>
+                            
+                            <a href="#">
+                                <div class="login_btn text-center text-sm p-2 rounded-lg cursor-pointer">Register</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+
+        </div>
+        {% endblock %}
+        <!----========== RECENT CONTEST ==========---->
+        {% block recent_contest %}
+        {% endblock %}
+
+        <!----========== UPCOMING CONTEST ==========---->
+        {% block upcoming_contest %}
+        {% endblock %}
+
+
+    </div>
+
+
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+
+        // Whenever the user explicitly chooses light mode
+        localStorage.theme = 'light'
+
+        // Whenever the user explicitly chooses dark mode
+        localStorage.theme = 'dark'
+
+        // Whenever the user explicitly chooses to respect the OS preference
+        localStorage.removeItem('theme')
+
+        const body = document.getElementById('body'),
+            sidebar = body.querySelector('nav'),
+            toggle = body.querySelector(".toggle"),
+            searchBtn = body.querySelector(".search-box"),
+            modeSwitch = body.querySelector(".toggle-switch"),
+            modeText = body.querySelector(".mode-text");
+        
+        
+
+        toggle.addEventListener("click" , () =>{
+            sidebar.classList.toggle("close");
+        })
+
+        searchBtn.addEventListener("click" , () =>{
+            sidebar.classList.remove("close");
+        })
+
+        modeSwitch.addEventListener("click" , () =>{
+            body.classList.toggle("dark");
+            
+            if(body.classList.contains("dark")){
+                modeText.innerText = "Light mode";
+            }else{
+                modeText.innerText = "Dark mode";
+                
+            }
+        });
+
+
+
+
+        /*=============== QUESTIONS ACCORDION ===============*/
+        const accordionItems = document.querySelectorAll('.questions__item')
+
+        accordionItems.forEach((item) =>{
+            const accordionHeader = item.querySelector('.questions__header')
+
+            accordionHeader.addEventListener('click', () =>{
+                const openItem = document.querySelector('.accordion-open')
+
+                toggleItem(item)
+
+                if(openItem && openItem!== item){
+                    toggleItem(openItem)
+                }
+            })
+        })
+
+        const toggleItem = (item) =>{
+            const accordionContent = item.querySelector('.questions__content')
+
+            if(item.classList.contains('accordion-open')){
+                accordionContent.removeAttribute('style')
+                item.classList.remove('accordion-open')
+            }else{
+                accordionContent.style.height = accordionContent.scrollHeight + 'px'
+                item.classList.add('accordion-open')
+            }
+
+        }
+
+
+    </script>
+
+     <!-- Swiper JS -->
+
+     <!-- Initialize Swiper -->
+     <script>
+
+        let width = screen.width;
+        let silde = 0;
+        console.log(width);
+        if (width >= 0)
+        {
+            silde = 1;
+        }
+        if (width >= 540)
+        {
+            silde = 2;
+        }
+        if (width >= 768)
+        {
+            silde = 3;
+        }
+        var swiper = new Swiper(".class_swiper", {
+            slidesPerView: silde,
+            spaceBetween: 15,
+            pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+            },
+            autoplay: {
+           delay: 5000,
+           disableOnInteraction: false
+         },
+        });
+        
+        var swiper = new Swiper(".mySwiper", {
+         spaceBetween: 30,
+         centeredSlides: true,
+         autoplay: {
+           delay: 5000,
+           disableOnInteraction: false
+         },
+         pagination: {
+           el: ".swiper-pagination",
+           clickable: true
+         },
+         navigation: {
+           nextEl: ".swiper-button-next",
+           prevEl: ".swiper-button-prev"
+         }
+       });
+     </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!----========== Favicon ========== -->
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'images/emath.png' %}">
+
+    <!----========== Boxicons CSS ========== -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+
+
+    <!----========== Script ========== -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+ 
+  
+    <title>Task - Emath</title>
+</head>
+<body id="body">
+
+    <!----========== NAVBAR ==========---->
+    <nav class="sidebar close" id="nav">
+        <header>
+            <a href="{% url 'home' %}">
+                <div class="image-text">
+                    {% load static %}
+                    <img class="m-2 mb-0 h-8 w-8" src="{% static 'images/emath.png' %}" alt="">
+                    <div class="text logo-text">
+                        <span class="name">Emath</span>
+                        <span class="profession">Learn for Future</span>
+                    </div>
+                </div>
+            </a>
+            
+
+            <i class='bx bx-chevron-right toggle bx-xs mt-1'></i>
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+
+                <li class="search-box">
+                    <i class='bx bx-search icon'></i>
+                    <input type="text" placeholder="Search...">
+                </li>
+
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="{% url 'home' %}">
+                            <i class='bx bx-home-alt icon' ></i>
+                            <span class="text nav-text">Home</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="{% url 'problems' %}">
+                            <i class='bx bx-task icon'></i>
+                            <span class="text nav-text">Problems</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="{% url 'submissions' %}">
+                            <i class='bx bx-book-content icon'></i>
+                            <span class="text nav-text">Submissions</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="{% url 'contest' %}">
+                            <i class='bx bx-bar-chart-alt-2 icon'></i>
+                            <span class="text nav-text">Contest</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+
+            <div class="bottom-content">
+                <li class="">
+                    <a href="{% url 'login' %}">
+                        <i class='bx bx-user-circle icon bx-sm'></i>
+                        <span class="text nav-text">Account</span>
+                    </a>
+                </li>
+
+                <li class="mode">
+                    <div class="sun-moon">
+                        <i class='bx bx-moon icon moon'></i>
+                        <i class='bx bx-sun icon sun'></i>
+                    </div>
+                    <span class="mode-text text">Dark mode</span>
+
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+                
+            </div>
+        </div>
+
+    </nav>
+
+    <div class="home_container p-2 pr-4 pl-0 ml-20 mr-20 sm:p-8 pt-6">
+        <div class="task_info">
+            <div class="task_name text-2xl font-semibold"> Basic shape 01</div>
+            <div class="task_time text-sm font-medium text-gray-400">Ends in 3 days 13:22:46</div>
+        </div>
+
+        <div class="task_container w-full h-64">
+
+        </div>
+
+    </div> 
+
+
+    <div class="rightbar__container hidden lg:block">
+
+        <!----========== LOGIN ==========---->
+        <div class="login__container h-auto w-full rounded-xl p-4 ">
+            <div class="user_profile flex">
+                {% load static %}
+                <img class="h-12 w-12 mr-4 rounded-full" src="{% static 'images/user.png' %}" alt="">
+                <div class="">
+                    <div class="text-base font-semibold">Welcome!✋🏻</div>
+                    <div class="text-xs font-medium text-gray-400">Let's learn something new today</div>
+                </div>
+            </div>
+            <div class="user_login_register grid grid-cols-2 gap-2 mt-4">
+                <a href="{% url 'login' %}">
+                    <div class="login_btn text-center text-sm p-2 rounded-lg cursor-pointer">Login</div>
+                </a>
+                
+                <div class="register_btn text-center text-sm p-2 rounded-lg cursor-pointer">Register</div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const body = document.getElementById('body'),
+        sidebar = body.querySelector('nav'),
+        toggle = body.querySelector(".toggle"),
+        searchBtn = body.querySelector(".search-box"),
+        modeSwitch = body.querySelector(".toggle-switch"),
+        modeText = body.querySelector(".mode-text");
+
+        toggle.addEventListener("click" , () =>{
+            sidebar.classList.toggle("close");
+        })
+
+        searchBtn.addEventListener("click" , () =>{
+            sidebar.classList.remove("close");
+        })
+
+        modeSwitch.addEventListener("click" , () =>{
+            body.classList.toggle("dark");
+            
+            if(body.classList.contains("dark")){
+                modeText.innerText = "Light mode";
+            }else{
+                modeText.innerText = "Dark mode";
+                
+            }
+        });
+
+
+
+
+        /*=============== QUESTIONS ACCORDION ===============*/
+        const accordionItems = document.querySelectorAll('.questions__item')
+
+        accordionItems.forEach((item) =>{
+            const accordionHeader = item.querySelector('.questions__header')
+
+            accordionHeader.addEventListener('click', () =>{
+                const openItem = document.querySelector('.accordion-open')
+
+                toggleItem(item)
+
+                if(openItem && openItem!== item){
+                    toggleItem(openItem)
+                }
+            })
+        })
+
+        const toggleItem = (item) =>{
+            const accordionContent = item.querySelector('.questions__content')
+
+            if(item.classList.contains('accordion-open')){
+                accordionContent.removeAttribute('style')
+                item.classList.remove('accordion-open')
+            }else{
+                accordionContent.style.height = accordionContent.scrollHeight + 'px'
+                item.classList.add('accordion-open')
+            }
+
+        }
+
+
+    </script>
+
+     <!-- Swiper JS -->
+
+     <!-- Initialize Swiper -->
+     <script>
+
+        let width = screen.width;
+        let silde = 0;
+        console.log(width);
+        if (width >= 0)
+        {
+            silde = 1;
+        }
+        if (width >= 540)
+        {
+            silde = 2;
+        }
+        if (width >= 768)
+        {
+            silde = 3;
+        }
+        var swiper = new Swiper(".class_swiper", {
+            slidesPerView: silde,
+            spaceBetween: 15,
+            pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+            },
+            autoplay: {
+           delay: 5000,
+           disableOnInteraction: false
+         },
+        });
+        
+        var swiper = new Swiper(".mySwiper", {
+         spaceBetween: 30,
+         centeredSlides: true,
+         autoplay: {
+           delay: 5000,
+           disableOnInteraction: false
+         },
+         pagination: {
+           el: ".swiper-pagination",
+           clickable: true
+         },
+         navigation: {
+           nextEl: ".swiper-button-next",
+           prevEl: ".swiper-button-prev"
+         }
+       });
+     </script>
+
+
+
+</body>
+</html>
